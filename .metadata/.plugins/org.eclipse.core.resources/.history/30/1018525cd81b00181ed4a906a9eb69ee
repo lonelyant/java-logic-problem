@@ -1,0 +1,31 @@
+package test;
+
+public class Rabbits {
+	
+	static int sum = 1;
+	
+	public static class Rabbit{
+		static int month = 1;
+		public static void cal(){
+			if(month < 4){
+				month+=1;
+			}else{
+				new Rabbit();
+				sum++;
+			}
+		}
+	}	
+	
+	
+	public static void main(String[] args) {
+		Rabbits rabbits = new Rabbits();
+		for (int i = 1; i < 11; i++) {
+			if(i<3){
+				
+			}else{
+				new 
+			}
+		}
+	}
+	
+}

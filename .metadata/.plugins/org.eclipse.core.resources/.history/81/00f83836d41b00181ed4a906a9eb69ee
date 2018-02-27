@@ -1,0 +1,15 @@
+package test;
+
+public class Rabbit {
+
+	int month = 1;
+	
+	public void cal(){
+		if(month < 4){
+			month+=1;
+		}else{	
+			new Rabbit().cal();
+			System.out.println("新生了一只兔子");
+		}
+	}
+}

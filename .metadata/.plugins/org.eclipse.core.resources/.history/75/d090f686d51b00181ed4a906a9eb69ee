@@ -1,0 +1,27 @@
+import org.junit.Test;
+
+public class Demo1 {
+
+	public static void main(String[] args) {
+
+	}
+
+	/***********************************************************
+	 * 题目：古典问题：有一对兔子，从出生后第3个月起每个月都生一对兔子， 小兔子长到第三个月后每个月又生一对兔子，假如兔子都不死，
+	 * 问每个月的兔子总数为多少？
+	 * 这里只打印出10个月的兔子对数。
+	 */
+	@Test
+	public void rubbit() {
+		for (int i = 1; i < 11; i++) {
+			System.out.println("第"+i+"个月的兔子数为："+ calcrubbit(i));
+		}
+	}
+	public int calcrubbit(int month){
+		if(month > 3){
+			return calcrubbit(month-1)+calcrubbit(month-2);
+		}else{
+			return 1;
+		}
+	}
+}
