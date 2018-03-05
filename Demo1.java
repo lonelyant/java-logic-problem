@@ -1,5 +1,10 @@
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.junit.Test;
 
@@ -1027,20 +1032,118 @@ public class Demo1 {
 				System.out.println("Type Error!Please input again:");
 			}
 		}
-		
-		int g,s,b,q;
+
+		int g, s, b, q;
 		g = num % 10;
 		s = num / 10 % 10;
 		b = num / 100 % 10;
 		q = num / 1000;
 
-		g = (g+5)%10;
-		s = (s+5)%10;
-		b = (b+5)%10;
-		q = (q+5)%10;
-		
-		int newnum = g*1000 + s*100 + b*10 + q;
-		
+		g = (g + 5) % 10;
+		s = (s + 5) % 10;
+		b = (b + 5) % 10;
+		q = (q + 5) % 10;
+
+		int newnum = g * 1000 + s * 100 + b * 10 + q;
+
 		System.out.println(newnum);
 	}
+
+	/*
+	 * 计算字符串中子串出现的次数
+	 */
+	@Test
+	public void _42() {
+		Scanner in = new Scanner(System.in);
+		System.out.println("请输入一个字符串");
+		String sen = in.next();
+		System.out.println("请输入要查找的子字符串");
+		String str = in.next();
+
+		Pattern p = Pattern.compile(str, Pattern.CASE_INSENSITIVE);
+		Matcher m = p.matcher(sen);
+		int count = 0;
+		while (m.find()) {
+			count++;
+		}
+		System.out.println(str + "在" + sen + "出现的次数为" + count);
+	}
+
+	/*
+	 * 有2个学生，每个学生有3门课的成绩，从键盘输入以上数据（包括学生号，姓名，三门课成绩），计算出平均成绩，况原有的数据和计算出的平均分数存放在磁盘文件
+	 * "stud "中。
+	 */
+	@Test
+	public void _43(){
+		int stunum = 2;//学生数量
+		String[][] stu = new String[stunum][6];  // [0]放平均成绩[1-3]放三门课成绩[4]放学号[5]放姓名
+		Scanner sc = null;
+		float sum;
+		for (int i = 1; i <= stunum; i++) {
+			sum = 0f;
+			sc = new Scanner(System.in);
+			System.out.print("输入第"+i+"个学生的学号：");
+			stu[i-1][4] = sc.next();
+			System.out.print("输入第"+i+"个学生的姓名：");
+			stu[i-1][5] = sc.next();
+			for (int j = 1; j <=3; j++) {
+				//sum = 0f;
+				System.out.print("输入"+stu[i-1][5]+"的第"+j+"门课成绩:");
+				stu[i-1][j] = sc.nextFloat()+"";
+				sum +=  Float.parseFloat(stu[i-1][j]);
+				System.out.println(sum);
+			}
+			stu[i-1][0] = sum/3+"";
+		}
+		
+		/*for (String[] strings : stu) {
+			for (String string : strings) {
+				System.out.print(string+" ");
+			}
+			System.out.println("");
+		}*/
+		
+		try {
+			File f = new File("C:/Users/Administrator/Desktop/stu.txt");
+			if (f.exists()) {
+				System.err.println("目标文件已经存在！将被覆盖！");
+				f.delete();
+				f.createNewFile();
+			}else{
+				f.createNewFile();
+			}
+			
+			BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+			bw.write("姓名"+"\t"+"学号"+"\t"+"成绩1"+"\t"+"成绩2"+"\t"+"成绩3"+"\t"+"平均分"+"\r\n");
+			for (int i = 0; i < 2; i++) {
+				bw.write(stu[i][5]+"\t"+stu[i][4]+"\t"+stu[i][1]+"\t"+stu[i][2]+"\t"+stu[i][3]+"\t"+stu[i][0]+"\r\n");
+			}
+			bw.flush();
+			bw.close();
+		} catch (Exception e) {
+			System.err.println("错误~");
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
